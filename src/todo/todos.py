@@ -87,7 +87,7 @@ class Todos:
 
     def done(self, _id: int) -> None:
         for todo in self._todos:
-            if todo._id == _id:
+            if todo._id == str(_id):
                 todo.status = "done"
                 logger.info(f"Marked todo item with id {_id} as done.")
                 self.save()
