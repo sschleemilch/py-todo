@@ -1,0 +1,58 @@
+
+
+[tool.poetry]
+name = "todo"
+homepage = "https://github.com/sschleemilch/py-todo"
+documentation = "https://github.com/sschleemilch/py-todo/blob/main/README.md"
+version = "0.1.0"
+description = "Python based command line todo tracker"
+authors = ["Sebastian Schleemilch <sebastian.schleemilch@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Typing :: Typed",
+    'License :: OSI Approved :: MIT License',
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+rich = "^12.5.1"
+rich-click = "^1.5.1"
+
+[tool.poetry.dev-dependencies]
+black = "^22.6"
+mypy = "^0.971"
+pytest = "^7.1.2"
+pytest-cov = "^3.0.0"
+pre-commit = "^2.20.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.8"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+files = ["src/todo"]
+show_error_codes = true
+strict = true
+enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.isort]
+profile = "black"
+
+[tool.black]
+line-length = 120
+
+[tool.poetry.scripts]
+todo = "todo.__main__:cli"
