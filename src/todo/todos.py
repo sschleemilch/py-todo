@@ -5,8 +5,8 @@ from typing import List
 
 from rich import box
 from rich.console import Console
-from rich.table import Table
 from rich.panel import Panel
+from rich.table import Table
 
 from todo.todo import Todo
 
@@ -78,7 +78,7 @@ class Todos:
             if found:
                 return next_id
 
-    def sort(self):
+    def sort(self) -> None:
         self._todos.sort(key=lambda x: x.days_remaining)
 
     def add(self, content: str, due: str) -> None:
@@ -95,11 +95,11 @@ class Todos:
         logger.error(f"Item with id {_id} does not exist. Current todos:")
         self.render()
 
-    def save(self):
+    def save(self) -> None:
         db_data = []
         for todo in self._todos:
-            entry = {}
-            entry["id"] = todo._id
+            entry: dict[str, str] = {}
+            entry["id"] = str(todo._id)
             entry["content"] = todo.content
             entry["status"] = todo.status
             entry["due"] = todo.due
@@ -107,7 +107,7 @@ class Todos:
         with open(self.database, "w") as stream:
             json.dump(db_data, stream, indent=4)
 
-    def clean(self):
+    def clean(self) -> None:
         open_todos = []
         for todo in self._todos:
             if todo.status == "open":
