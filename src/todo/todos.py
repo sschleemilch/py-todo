@@ -39,9 +39,9 @@ class Todos:
             styles: list[str] = ["green"]
             content_style: str = "[b]"
             status: str = ":white_question_mark:"
-            if entry.days_remaining < 1:
+            if entry.days_remaining <= 1:
                 styles.append("red")
-            elif entry.days_remaining < 3:
+            elif entry.days_remaining <= 3:
                 styles.append("dark_orange")
             if entry.status == "done":
                 styles.append("default")
@@ -87,7 +87,7 @@ class Todos:
 
     def done(self, _id: int) -> None:
         for todo in self._todos:
-            if todo._id == str(_id):
+            if todo._id == _id:
                 todo.status = "done"
                 logger.info(f"Marked todo item with id {_id} as done.")
                 self.save()
@@ -99,7 +99,7 @@ class Todos:
         db_data = []
         for todo in self._todos:
             entry: dict[str, str] = {}
-            entry["id"] = str(todo._id)
+            entry["id"] = todo._id
             entry["content"] = todo.content
             entry["status"] = todo.status
             entry["due"] = todo.due
